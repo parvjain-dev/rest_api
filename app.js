@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+//setting up database
+const connectDB = require("./db/connect")
+
+
 const PORT = process.env.PORT || 3000;
 
 //now we have to import routes here
@@ -15,6 +19,7 @@ app.use("/api/products",products_route)
 
 const start = async ()=>{
     try {
+        await connectDB();
         app.listen(PORT ,()=> {
            console.log( `I am live at ${PORT}`);
         });
